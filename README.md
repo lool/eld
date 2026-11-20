@@ -79,11 +79,15 @@ packages of a Linux distribution:
 cmake -G Ninja \
   -DCMAKE_BUILD_TYPE=Release \
   -DELD_USE_EXTERNAL_LLVM=ON \
-  -DLLVM_DIR=/usr/lib/llvm-24/lib/cmake/llvm \
+  -DLLVM_DIR=<LLVM_INSTALL_DIR>/lib/cmake/llvm \
   -B <ELD_BUILD_DIR> \
   -S <ELD_SOURCE_DIR>
 ninja -C <ELD_BUILD_DIR>
 ```
+
+`<LLVM_INSTALL_DIR>` is the prefix of the LLVM installation, for instance
+`/usr/lib/llvm-<version>` with the `llvm-<version>-dev` package on Debian and
+Ubuntu.
 
 LLVM installations with static component libraries and LLVM installations
 built as a single shared library (`LLVM_LINK_LLVM_DYLIB`, as in the Debian,
@@ -156,6 +160,8 @@ ELD. Their defaults preserve the standard build and install layout.
   The `<target>-link` drivers (`aarch64-link`, `arm-link`, ...) are symlinks
   to `ld.eld` by default on Unix hosts. Turn this off to install copies
   instead, or pass `-DELD_CREATE_SYMLINKS=OFF` to not create these drivers.
+
+### Other helpful CMake options
 
 Some (optional) helpful CMake options:
 
